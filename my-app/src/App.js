@@ -19,13 +19,14 @@ class App extends Component {
         title : 'Travel',
         category: 'Angular Dev'
       }
-    ]});
+    ]}
+  );
+    
   }
   
   render() {
     return (
       <div className="App">
-        My App
         <Projects projects = {this.state.projects}/>
       </div>
     );
