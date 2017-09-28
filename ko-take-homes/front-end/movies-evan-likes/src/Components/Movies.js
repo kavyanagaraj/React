@@ -3,6 +3,7 @@ import Search_Filter from '../Services/Search.js'
 import SearchBar from './Search-Bar.js' 
 import Decade from './Decade.js'
 import Decade_Filter from '../Services/Decade-Filter.js'
+import ImageLoader from 'react-imageloader';
 import storageAvailable from '../App.js'
 
 class Movies extends Component {
@@ -39,6 +40,10 @@ class Movies extends Component {
         this.setState({filtered_list: Decade_Filter(this.state.movies, this.state.selected_decade)})
       }      
     })
+  }
+
+  preloader() {
+    return <img src="./spinner.gif"/>;
   }
 
   rotten_tomato(event){
@@ -78,24 +83,24 @@ class Movies extends Component {
     this.state.filtered_list.sort(function(movie1,movie2){
       return movie1.title.localeCompare(movie2.title);
     })
+
     let userList = this.state.filtered_list.map((movie,index) => {
       let score = movie.score * 100
-
       return (<li key = {index}> 
           <div className = "collapsible-header" onClick = {this.get_review.bind(this, movie.id)}>{score}% - <a onClick={this.rotten_tomato.bind(this)} href = {movie.url} target = "_blank">{movie.title} </a> - ({movie.year})</div>
-          { this.state.review !== {} && <div className="collapsible-body">
+            <div className="collapsible-body">
             { this.state.is_review === true && <div className = "row">
               <div className="col s4 m2">                   
-                  <img src= {this.state.review.image_url} id = "movie_image" alt=":("/>
+                  <img src= {this.state.review.image_url} id = "movie_image" alt=":("/>  
                 </div>
                 <div className="col s8 m10">
                   <p>{this.state.review.review}</p>
                 </div> 
-              </div>}
-          </div>}     
-      </li>)
-      
+              </div>}             
+          </div>     
+      </li>)  
     }) 
+
     return (
       <div> 
         <SearchBar search_filter={this.search_filter.bind(this)}/>
