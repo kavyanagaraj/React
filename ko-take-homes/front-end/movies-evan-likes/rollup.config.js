@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import babel from 'rollup-plugin-babel'
 import json from 'rollup-plugin-json'
+import resolve from 'rollup-plugin-node-resolve'
 
 const copy = function (options) {
   return {
@@ -37,7 +38,7 @@ export default {
   globals: {
     react: 'React',
     'prop-types': 'PropTypes',
-    'react-dom': 'ReactDOM'
+    'react-dom': 'ReactDOM',
   },
   plugins: [
     json(),
@@ -53,6 +54,7 @@ export default {
     link({
       src: '../api/assets',
       dest: 'build/assets'
-    })
+    }),
+    resolve()
   ]
 }

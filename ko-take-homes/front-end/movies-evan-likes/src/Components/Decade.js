@@ -3,28 +3,29 @@ import React, { Component } from 'react';
 class Decade extends Component {
   constructor(props){
     super(props)
-    this.state ={decade : [], movies : []} 
+    this.state ={decade : [], movies : this.props.movies.movies} 
   } 
 
-  componentDidMount(){
-    this.setState({movies: this.props.movies});
-  };
-
   componentWillReceiveProps(props){
+    //Setting the movies and computing the decade array
     this.setState({movies: props.movies.movies}, function(){
         this.compute_decade(); 
     })  
   }
 
+  //Handle update when decade is selected
   handleUpdate(event){
-      console.log(event.target.value)
+      // Call back from the movies component to handle change of decade
       this.props.decade_filter(event.target.value)
   }
 
+  //Renders the drop down for decade filter
   render() {
     var decade_list; 
     decade_list = this.state.decade.map((decade, index) =>{
-        return(<li onClick={this.handleUpdate.bind(this)} key = {index} value={decade}>{decade}</li>)
+        return(<div key = {index} > <li onClick={this.handleUpdate.bind(this)} value={decade} className = "decade">{decade}</li>
+              <li className="divider"></li> </div>
+          )
     })
     return (
         <div>
@@ -36,6 +37,7 @@ class Decade extends Component {
     )
   }
 
+  //Computes the decade list
   compute_decade(){
     var minYear = this.state.movies[0].year;
     var maxYear = this.state.movies[0].year;

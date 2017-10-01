@@ -5,15 +5,20 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      movies: []
+      movies: [],
+      error : ""
     }
   };
 
   componentDidMount(){
+    // To get the movie list
     this.getMovies();
   };
 
+  // To get the list of movies evan likes
   getMovies(){
+    this.setState({error : ""})
+    //Checking if data exists in local storage. If it doesn't exist then making a get request to get data
     if (!localStorage['movies']){
       axios.get("http://localhost:3000/movies")
         .then((result) => {
@@ -24,9 +29,12 @@ class App extends Component {
               localStorage.setItem("movies", JSON.stringify(result.data))
             }
         }).catch((err) => {
+            // Can send a status from the web service if there is no data found
+            this.state({error : "Something went wrong"})
             console.log(err)
       }) 
     }else{
+      // Getting the list from local storage
       var movie_list = localStorage.getItem('movies');
       if(movie_list){
         this.setState({movies: JSON.parse(movie_list)})
@@ -34,8 +42,10 @@ class App extends Component {
     }   
   } 
   
+  //Display the list of there is no error
   render(){
-    return(
+    if(!this.state.error){
+     return( 
       <div className='page'>
         <div className='app-description'>
           <h1 className='app-description__title'>Movies Evan Likes!</h1>
@@ -43,14 +53,16 @@ class App extends Component {
             Below is a (not) comprehensive list of movies that Evan really
             likes.
           </p>
-        </div>
-       
+        </div>       
         <Movies movies = {this.state.movies} /> 
-     </div>
-    )
+      </div>)
+    }else{
+      return (<h1>{this.state.error}</h1>)
+    }
   }
 } 
 
+// To check if storage is available
 export function storageAvailable(type) {
   try {
       var storage = window[type],
