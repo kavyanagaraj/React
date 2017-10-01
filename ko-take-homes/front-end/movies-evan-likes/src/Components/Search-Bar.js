@@ -3,13 +3,14 @@ import React, { Component } from 'react';
 class SearchBar extends Component {
   constructor(props){
     super(props)
-    this.state ={search : ""} 
   } 
-
+  
+  // Handle update on search input
   handleUpdate(event){
-      console.log(event.target.value)
-      this.props.search_filter(event.target.value)
+    // Invoking call back from the movies component to handle change in searchterm
+    this.props.search_filter(event.target.value)
   }
+
   render() {
     return (
         <div>

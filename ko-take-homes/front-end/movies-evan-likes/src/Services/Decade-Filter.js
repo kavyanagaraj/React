@@ -1,3 +1,4 @@
+// To filter the movies in the input decade
 function Decade_Filter(items, decade){
     if(!items) return [];
     if(!decade) return items;

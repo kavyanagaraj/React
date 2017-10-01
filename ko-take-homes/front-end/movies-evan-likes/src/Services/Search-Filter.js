@@ -1,5 +1,5 @@
+// To filter the items based on the search text
 function Search_Filter(items, search_text){
-    console.log("inside filter",items, search_text);
     if(!items) return [];   
     //Checking for search text length to filter
     if(!search_text || search_text.length < 2) return items;

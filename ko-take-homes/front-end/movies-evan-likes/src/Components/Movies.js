@@ -50,7 +50,7 @@ class Movies extends Component {
     })
   }
 
-  //To open rotten tomato site when link is clicked an dnot open the review tab
+  //To open rotten tomato site when link is clicked and not open the review tab
   open_url(event){
     this.setState({is_review : false});
     event.stopPropagation()

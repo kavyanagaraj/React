@@ -15,7 +15,7 @@ class Decade extends Component {
 
   //Handle update when decade is selected
   handleUpdate(event){
-      // Call back from the movies component to handle change of decade
+      // Invoking call back from the movies component to handle change of decade
       this.props.decade_filter(event.target.value)
   }
 
