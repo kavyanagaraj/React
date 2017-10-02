@@ -11,7 +11,7 @@ class App extends Component {
   };
 
   componentDidMount(){
-    // To get the movie list
+    // To get the list of movies
     this.getMovies();
   };
 
@@ -42,7 +42,7 @@ class App extends Component {
     }   
   } 
   
-  //Display the list of there is no error
+  //Display the list of there is no error else display the error message
   render(){
     if(!this.state.error){
      return( 
@@ -57,7 +57,7 @@ class App extends Component {
         <Movies movies = {this.state.movies} /> 
       </div>)
     }else{
-      return (<h1>{this.state.error}</h1>)
+      return (<h2>{this.state.error}</h2>)
     }
   }
 } 

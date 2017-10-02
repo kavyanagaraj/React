@@ -91,6 +91,8 @@ class Movies extends Component {
     //Creating the html - collpasible header and body for the movies
     let userList = this.state.filtered_list.map((movie,index) => {
       let score = movie.score * 100
+      // Collapsible header with title, year and score
+      // Body with image served from Amazon S3 bucket and review of the movie 
       return (<li key = {index}> 
           <div className = "collapsible-header" onClick = {this.get_review.bind(this, movie.id)}>{score}% - <a onClick={this.open_url.bind(this)} href = {movie.url} target = "_blank">{movie.title} </a> - ({movie.year})</div>
           <div className={this.state.is_review ? 'collapsible-body' : 'close_div'}>
